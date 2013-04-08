@@ -21,7 +21,7 @@ class SemiStaticRenderer(object):
 
     def validate(self):
         if not os.path.exists(self.prefix):
-            os.mkdirs(self.prefix)
+            os.makedirs(self.prefix)
         if not os.path.exists(self.prefix):
             raise ConfigurationError("{0} is not readable".format(self.prefix))
             
@@ -41,7 +41,7 @@ class SemiStaticRenderer(object):
         if self.is_static(request, fullname):
             return self.static_render(request, os.path.join(self.prefix, path))
         try:
-            return Response(render(fullname, value, request=request, package=path))
+            return Response(render(fullname, value, request=request, package=package))
         except Exception:
             #this is bad.
             logger.info("{0} is not found".format(fullname))
